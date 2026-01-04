@@ -1,0 +1,18 @@
+{
+  "name": "cours-emois-plan-actions",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Mini site pédagogique: gestion de plan d'actions (Node.js + Express + SQLite)",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.8.1",
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}

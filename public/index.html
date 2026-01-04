@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Plan d'actions — démo pédagogique</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="container header__row">
+        <div>
+          <h1 class="header__title">Gestion de plan d'actions</h1>
+          <p class="header__subtitle">
+            Démo Node.js + SQLite : ajouter, filtrer, mettre à jour et supprimer des actions.
+          </p>
+        </div>
+        <div class="header__status" id="connectionStatus" aria-live="polite"></div>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="panel">
+        <h2 class="panel__title">Ajouter une action</h2>
+        <form id="createForm" class="form">
+          <div class="form__grid">
+            <label class="field">
+              <span class="field__label">Titre *</span>
+              <input class="field__input" name="title" required maxlength="120" placeholder="Ex: Mettre à jour la procédure..." />
+            </label>
+
+            <label class="field">
+              <span class="field__label">Origine *</span>
+              <select class="field__input" name="origin" required>
+                <option value="">— Choisir —</option>
+                <option value="retour_experience">Retour d'expérience (REX)</option>
+                <option value="cartographie_risques">Cartographie des risques</option>
+                <option value="audit">Audit</option>
+                <option value="incident">Incident / Non-conformité</option>
+                <option value="autre">Autre</option>
+              </select>
+            </label>
+
+            <label class="field">
+              <span class="field__label">Statut</span>
+              <select class="field__input" name="status">
+                <option value="todo">À faire</option>
+                <option value="in_progress">En cours</option>
+                <option value="done">Terminé</option>
+              </select>
+            </label>
+
+            <label class="field">
+              <span class="field__label">Priorité</span>
+              <select class="field__input" name="priority">
+                <option value="low">Basse</option>
+                <option value="medium" selected>Moyenne</option>
+                <option value="high">Haute</option>
+              </select>
+            </label>
+
+            <label class="field">
+              <span class="field__label">Échéance</span>
+              <input class="field__input" name="dueDate" type="date" />
+            </label>
+
+            <label class="field field--full">
+              <span class="field__label">Description</span>
+              <textarea class="field__input field__textarea" name="description" rows="3" placeholder="Contexte, détails, attendu..."></textarea>
+            </label>
+          </div>
+
+          <div class="form__actions">
+            <button class="button button--primary" type="submit">Ajouter</button>
+            <span class="form__hint">Les champs marqués * sont obligatoires.</span>
+          </div>
+        </form>
+      </section>
+
+      <section class="panel">
+        <div class="panel__row">
+          <h2 class="panel__title">Actions</h2>
+          <button class="button" id="refreshBtn" type="button">Rafraîchir</button>
+        </div>
+
+        <div class="filters" role="region" aria-label="Filtres">
+          <label class="field">
+            <span class="field__label">Filtrer par origine</span>
+            <select class="field__input" id="filterOrigin">
+              <option value="">Toutes</option>
+              <option value="retour_experience">Retour d'expérience (REX)</option>
+              <option value="cartographie_risques">Cartographie des risques</option>
+              <option value="audit">Audit</option>
+              <option value="incident">Incident / Non-conformité</option>
+              <option value="autre">Autre</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span class="field__label">Filtrer par statut</span>
+            <select class="field__input" id="filterStatus">
+              <option value="">Tous</option>
+              <option value="todo">À faire</option>
+              <option value="in_progress">En cours</option>
+              <option value="done">Terminé</option>
+            </select>
+          </label>
+
+          <label class="field field--grow">
+            <span class="field__label">Recherche</span>
+            <input class="field__input" id="filterQ" placeholder="Titre ou description" />
+          </label>
+        </div>
+
+        <div id="stats" class="stats" aria-live="polite"></div>
+        <div id="list" class="list" aria-live="polite"></div>
+      </section>
+
+      <footer class="footer">
+        <p>
+          Astuce pédagogique : ouvrez <strong>src/db.js</strong> et <strong>server.js</strong> pour voir la persistance SQLite et l'API.
+        </p>
+      </footer>
+    </main>
+
+    <script src="/app.js" type="module"></script>
+  </body>
+</html>
